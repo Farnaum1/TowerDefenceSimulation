@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class EnemyController : MonoBehaviour
+{
+    [Header("Enemy Settings")]
+    [SerializeField] float moveSpeed = 1f;
+
+    [Header("Refrences")]
+    private EnemyPath enemyPath;
+
+    private Vector3 targetPosition;
+    private int currentWaypointIndex = 0;
+    private float waypointTolerance = 0.1f;
+
+    private Spawner spawner;
+
+    private void Awake()
+    {
+        // Find the EnemyPath class on awake before Start or Enable methods are called
+        enemyPath = GameObject.FindObjectOfType<EnemyPath>();
+    }
+
+    private void OnEnable()
+    {
+        SetTargetPosition();
+    }
+
+    void Update()
+    {
+        UpdateWaypoint();
+        MoveTowardsTarget();
+    }
+
+    private void MoveTowardsTarget()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+    }
+
+    private void SetTargetPosition()
+    {
+        currentWaypointIndex = 0;
+        targetPosition = enemyPath.GetWaypointPosition(currentWaypointIndex);
+    }
+
+    private void UpdateWaypoint()
+    {
+        // Calculate the distance to the target position
+        float relativeDistance = (transform.position - targetPosition).magnitude;
+
+        if (relativeDistance < waypointTolerance)
+        {
+            currentWaypointIndex++;
+            targetPosition = enemyPath.GetWaypointPosition(currentWaypointIndex);
+        }
+    }
+}
