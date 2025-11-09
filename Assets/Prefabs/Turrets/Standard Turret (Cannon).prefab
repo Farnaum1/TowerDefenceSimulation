@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  range: 15
+  range: 5
   enemyTag: Enemy
   fireRate: 1
   projectilePrefab: {fileID: 3868682041095876098, guid: 3322a03bac430b649977579315a9e03d, type: 3}

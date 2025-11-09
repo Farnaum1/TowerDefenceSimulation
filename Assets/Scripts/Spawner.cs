@@ -46,9 +46,9 @@ public class Spawner : MonoBehaviour
 
             EnemyController enemy = enemyClone.GetComponent<EnemyController>();
 
-            if (enemy != null)
+            if (enemy != null && waves[currentWaveIndex].enemiesLeft == 0)
             {
-                //Debug.Log("Spawned enemy: " + enemyClone.name);
+                currentWaveIndex++;
             }
             else
             {

@@ -58,6 +58,12 @@ public class EnemyController : MonoBehaviour
 
         if (relativeDistance < waypointTolerance)
         {
+            if (currentWaypointIndex == 6) 
+            {
+                gameObject.SetActive(false);
+                return;
+                // Damage the tower
+            }
             currentWaypointIndex++;
             targetPosition = enemyPath.GetWaypointPosition(currentWaypointIndex);
         }

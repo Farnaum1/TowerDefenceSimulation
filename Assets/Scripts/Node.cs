@@ -11,6 +11,7 @@ public class Node : MonoBehaviour
 
     private GameObject turret;
 
+    BuildManager buildManager; // Refrence to the singelton BuildManager
 
     private void OnMouseEnter()
     {
@@ -21,10 +22,20 @@ public class Node : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         starColor = rend.material.color;
+
+        // Get the instance of the BuildManager
+        buildManager = BuildManager.instance;
     }
 
     private void OnMouseDown()
     {
+
+        if (buildManager.GetTurretToBuild() == null)
+        {
+            // When no turret is selected to build return unless we get an error
+            return;
+        }
+
         if (turret != null)
         {
             Debug.Log("Can't build there! - TODO: Display on screen");
@@ -32,7 +43,7 @@ public class Node : MonoBehaviour
         }
 
         // Refrence to the turret to build from BuildManager singleton
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        GameObject turretToBuild = buildManager.GetTurretToBuild();
 
         // Using casting to convert the generic Object type returned by Instantiate to a GameObject type
         turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);

@@ -5,7 +5,8 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     private GameObject turretToBuild;
-    public GameObject standardTurretPrefab;
+    public GameObject cannonPrefab;
+    public GameObject ballistaPrefab;
 
     // A singleton instance, basically a globally accessible instance of the BuildManager
     public static BuildManager instance;
@@ -24,20 +25,21 @@ public class BuildManager : MonoBehaviour
     }
 
 
-    void Start()
-    {
-        turretToBuild = standardTurretPrefab;
-    }
-
-
     void Update()
     {
         
     }
 
-    public GameObject GetTurretToBuild()
+    public GameObject GetTurretToBuild ()
     {
         return turretToBuild;
     }
+
+    public void SetTurretToBuild(GameObject turret)
+    {
+        turretToBuild = turret;
+    }
+
+
 
 }
