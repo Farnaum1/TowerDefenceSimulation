@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -8,6 +9,7 @@ public class Spawner : MonoBehaviour
     private float spawnerTimer;
 
     [SerializeField] GameObject spawnPoint;
+    [SerializeField] TextMeshProUGUI waveCountdownText;
 
     public Wave[] waves;
 
@@ -33,6 +35,10 @@ public class Spawner : MonoBehaviour
             spawnerTimer = waves[currentWaveIndex].waveInterval;
             StartCoroutine(SpawnWave());
         }
+
+        // Update the wave countdown text
+        waveCountdownText.text = "Current Wave: " + (currentWaveIndex + 1);
+
 
     }
 

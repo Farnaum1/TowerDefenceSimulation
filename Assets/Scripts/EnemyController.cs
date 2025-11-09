@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 return;
-                // Damage the tower
+                // Damage the tower or player base here
             }
             currentWaypointIndex++;
             targetPosition = enemyPath.GetWaypointPosition(currentWaypointIndex);
