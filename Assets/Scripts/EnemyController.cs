@@ -7,15 +7,21 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Settings")]
     [SerializeField] float moveSpeed = 1f;
+    public int enemyHealth = 10;
 
     [Header("Refrences")]
     private EnemyPath enemyPath;
+    public Spawner spawner;
 
     private Vector3 targetPosition;
     private int currentWaypointIndex = 0;
     private float waypointTolerance = 0.1f;
 
-    private Spawner spawner;
+
+    private void Start()
+    {
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
+    }
 
     private void Awake()
     {
@@ -56,4 +62,32 @@ public class EnemyController : MonoBehaviour
             targetPosition = enemyPath.GetWaypointPosition(currentWaypointIndex);
         }
     }
+
+    public void TakeDamage(int damage)
+    {
+        enemyHealth -= damage;
+        Debug.Log("Enemy Health: " + enemyHealth);
+
+        if (enemyHealth <= 0)
+        {
+            Die();
+            Debug.Log("Enemy died!");
+        }
+    }
+
+    private void Die()
+    {
+        if (spawner != null)
+        {
+            spawner.waves[spawner.currentWaveIndex].enemiesLeft--;
+            Debug.Log("Enemies Left: " + spawner.waves[spawner.currentWaveIndex].enemiesLeft);
+        }
+        else
+        {
+            Debug.LogWarning("Spawner reference is missing on enemy!");
+        }
+        Destroy(gameObject);
+    }
+
+
 }

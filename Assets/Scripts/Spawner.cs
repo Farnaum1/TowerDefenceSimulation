@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
 
     public Wave[] waves;
 
-    private int currentWaveIndex = 0;
+    public int currentWaveIndex = 0;
 
 
 
@@ -39,10 +39,22 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-       for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
+        for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
+        {
+            // Instantiate the enemy and get the EnemyController from the instance
+            GameObject enemyClone = Instantiate (waves[currentWaveIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);
 
-       {
-            Instantiate (waves[currentWaveIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);
+            EnemyController enemy = enemyClone.GetComponent<EnemyController>();
+
+            if (enemy != null)
+            {
+                enemy.spawner = this; // Assign spawner reference to the spawned instance
+            }
+            else
+            {
+                Debug.LogWarning("Spawned object does not have an EnemyController component!");
+            }
+
             yield return new WaitForSeconds(waves[currentWaveIndex].spawnInterval);
         }
     }
@@ -51,7 +63,7 @@ public class Spawner : MonoBehaviour
 
     public class Wave
     {
-        public EnemyController[] enemies;
+        public GameObject[] enemies;
         public float spawnInterval;
         public float waveInterval;
 
