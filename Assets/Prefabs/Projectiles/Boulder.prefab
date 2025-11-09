@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7802206189393202473}
   - component: {fileID: 6622783657359557260}
   - component: {fileID: 8938569853455644230}
-  - component: {fileID: -4598429995032625809}
   - component: {fileID: 8466055917462993444}
   - component: {fileID: 3845244895808974092}
   m_Layer: 0
@@ -86,22 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-4598429995032625809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7425540355276314515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1fb8f26b87b856439845f6af0a51a2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 5
-  damage: 10
-  enemyTag: Enemy
-  enemyController: {fileID: -8951920060179191798, guid: ed0b3b11ed41d444984f5149eae649b3, type: 3}
 --- !u!135 &8466055917462993444
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -126,7 +109,7 @@ Rigidbody:
   m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

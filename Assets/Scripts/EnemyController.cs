@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Settings")]
     [SerializeField] float moveSpeed = 1f;
-    public int enemyHealth = 10;
+    public int enemyHealth = 100;
 
     [Header("Refrences")]
     private EnemyPath enemyPath;
@@ -66,12 +66,10 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         enemyHealth -= damage;
-        Debug.Log("Enemy Health: " + enemyHealth);
 
         if (enemyHealth <= 0)
         {
             Die();
-            Debug.Log("Enemy died!");
         }
     }
 

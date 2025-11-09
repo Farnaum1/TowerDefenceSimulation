@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9181562480957467960}
   - component: {fileID: 6381461205178309106}
   - component: {fileID: -5180179724750492645}
-  - component: {fileID: -8951920060179191798}
+  - component: {fileID: -5430436706848201981}
   m_Layer: 3
   m_Name: UFO 2
   m_TagString: Enemy
@@ -99,7 +99,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5021733
   m_Center: {x: 0, y: 0.26270688, z: 0}
---- !u!114 &-8951920060179191798
+--- !u!114 &-5430436706848201981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  enemyHealth: 10
+  enemyHealth: 100
   spawner: {fileID: 0}
 --- !u!1 &4868247538796069920
 GameObject:

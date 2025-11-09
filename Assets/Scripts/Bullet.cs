@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
+    public Transform target;
     public float speed = 70f;
+    public int damage = 20;
+    [SerializeField] GameObject bulletImpactEffect;
 
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -48,7 +46,18 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
+
+        // Assign bullet impact effect to an instance
+        GameObject bulletImpactInstance = (GameObject)Instantiate (bulletImpactEffect, transform.position, transform.rotation);
+        Destroy (bulletImpactInstance, 0.5f);
+
+
         // Add effects here (explosion, sound, etc.)
         Destroy(gameObject);
+
+        // Use target's EnemyController to apply damage
+        target.GetComponent<EnemyController>().TakeDamage(damage);
+
     }
+
 }

@@ -14,6 +14,9 @@ public class Cannon : MonoBehaviour
     private float fireCountdown = 0f;
     public GameObject projectilePrefab;
     public Transform firePoint;
+    [SerializeField] GameObject muzzleFlashPrefab;
+    public Transform currentTarget;
+
 
     void Start()
     {
@@ -51,6 +54,10 @@ public class Cannon : MonoBehaviour
 
         // Get the Bullet component from the instantiated bullet game object
         Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        // Assign muzzle flash effect to an instance
+        GameObject muzzleFlash = (GameObject) Instantiate (muzzleFlashPrefab, firePoint.position, firePoint.rotation);
+        Destroy(muzzleFlash, 0.5f);
 
         if (bullet != null)
         {
@@ -105,7 +112,9 @@ public class Cannon : MonoBehaviour
         Vector3 rotation = lookRotation.eulerAngles;
 
         // Only rotate on the y axis
-        transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        // Using Lerp for smooth rotation
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, rotation.y, 0f), Time.deltaTime * 5f);
+
     }
 
     private void OnDrawGizmosSelected()

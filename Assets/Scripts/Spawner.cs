@@ -41,14 +41,14 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
         {
-            // Instantiate the enemy and get the EnemyController from the instance
-            GameObject enemyClone = Instantiate (waves[currentWaveIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);
+            // Using casting to GameObject to avoid ambiguity
+            GameObject enemyClone = (GameObject)Instantiate (waves[currentWaveIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);
 
             EnemyController enemy = enemyClone.GetComponent<EnemyController>();
 
             if (enemy != null)
             {
-                enemy.spawner = this; // Assign spawner reference to the spawned instance
+                //Debug.Log("Spawned enemy: " + enemyClone.name);
             }
             else
             {
